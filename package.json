@@ -4,12 +4,16 @@
   "description": "Create private properties using the underscore naming convention",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava --verbose test.js",
+    "test:watch": "npm run test -- --watch"
   },
   "author": "Marcus Noble",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/AverageMarcus/privatise.git"
+    "type": "git",
+    "url": "https://github.com/AverageMarcus/privatise.git"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0"
   }
 }
