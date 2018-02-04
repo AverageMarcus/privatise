@@ -17,6 +17,8 @@ Privatise allows you to create private properties using the well established und
 $ npm install --save @averagemarcus/privatise
 ```
 
+> Note: Required Node 6+.
+
 ## Examples
 
 Privatise an instance:
