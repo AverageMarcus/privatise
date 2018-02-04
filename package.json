@@ -1,6 +1,6 @@
 {
   "name": "@averagemarcus/privatise",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Create private properties using the underscore naming convention",
   "main": "index.js",
   "scripts": {
