@@ -1,4 +1,4 @@
-# Privatise [![Build Status](https://travis-ci.org/averagemarcus/privatise.svg?branch=master)](https://travis-ci.org/averagemarcus/privatise)
+# Privatise [![Build Status](https://travis-ci.org/AverageMarcus/privatise.svg?branch=master)](https://travis-ci.org/AverageMarcus/privatise)
 
 > Create private properties using the underscore naming convention
 
