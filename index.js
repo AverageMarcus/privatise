@@ -4,18 +4,21 @@ class PrivateAccessError extends Error {
   }
 }
 
+const isStringifying = () => {
+  try {
+    throw new Error();
+  } catch (err) {
+    return err.stack.split('\n').find(line => line.indexOf('JSON.stringify') >= 0);
+  }
+}
+
 const handler = {
   get: function(target, key) {
     if (key[0] === '_') {
-      throw new PrivateAccessError();
-    } else if (key === 'toJSON') {
-      const obj = {};
-      for (const key in target) {
-        if (key[0] !== '_') {
-          obj[key] = target[key];
-        }
+      if (isStringifying()) {
+        return undefined;
       }
-      return () => obj;
+      throw new PrivateAccessError();
     }
     return target[key];
   },

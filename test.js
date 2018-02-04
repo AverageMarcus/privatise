@@ -111,3 +111,23 @@ test('static properties', t => {
   t.is(staticInstance.a, 123);
   t.throws(() => staticTestClass._b());
 });
+
+test('custom toJSON function', t => {
+  class TestClass {
+    constructor() {
+      this.a = 1;
+      this._b = 2;
+    }
+
+    toJSON() {
+      const obj = {};
+      for (const key in this) {
+        obj[key.toUpperCase()] = this[key];
+      }
+      return obj;
+    }
+  }
+  const instance = privatise(new TestClass());
+
+  t.is(JSON.stringify(instance), JSON.stringify({A:1}));
+})
