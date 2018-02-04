@@ -8,7 +8,7 @@ const isStringifying = () => {
   try {
     throw new Error();
   } catch (err) {
-    return err.stack.split('\n').find(line => line.indexOf('JSON.stringify') >= 0);
+    return err.stack.split('\n').find(line => line.indexOf('JSON.stringify') >= 0 || line.indexOf('Object.stringify') >= 0);
   }
 }
 
