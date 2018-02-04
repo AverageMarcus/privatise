@@ -4,14 +4,14 @@
 
 Privatise allows you to create private properties using the well established underscore prefix naming convention. Read and writes to any properties marked as private will result in an error being thrown.
 
-## Features
+## Features
 
 * Prevent read and write access to properties prefixed with `_`
 * Prevent private properties from being enumerable
 * Filter out private variables when calling `JSON.stringify`
 * Ability to privatise clases or instances
 
-## Install
+## Install
 
 ```sh
 $ npm install --save @averagemarcus/privatise
@@ -56,7 +56,7 @@ console.log(instance.publicInt); // 1
 console.log(instance._privateInt); // Error: Attempt to access private property
 ```
 
-## Created by
+## Created by
 
 * [Marcus Noble](http://github.com/averageMarcus/)
 
