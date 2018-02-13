@@ -12,9 +12,17 @@ const isStringifying = () => {
   }
 }
 
+const isInternalCall = () => {
+  try {
+    throw new Error();
+  } catch (err) {
+    return err.stack.split('\n').find(line => line.match(/Proxy\.\w/));
+  }
+}
+
 const handler = {
-  get: function(target, key) {
-    if (key[0] === '_') {
+  get: function(target, key, receiver) {
+    if (key[0] === '_' && !isInternalCall()) {
       if (isStringifying()) {
         return undefined;
       }

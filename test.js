@@ -10,6 +10,14 @@ class TestClass {
     this.publicString = 'Hello';
     this.publicFunction = () => 'ABC';
   }
+
+  proxyFunction() {
+    return this._internalProxyFunction();
+  }
+
+  _internalProxyFunction() {
+    return this._privateInt;
+  }
 }
 
 const instance = privatise(new TestClass);
@@ -24,6 +32,7 @@ test('properties cannot be accessed', t => {
   t.throws(() => instance._privateInt);
   t.throws(() => instance._privateString);
   t.throws(() => instance._privateFunction());
+  t.throws(() => instance._internalProxyFunction());
 });
 
 test('private properties are not enumerable', t=> {
@@ -40,6 +49,10 @@ test('public properties are enumerable', t=> {
     t.pass();
   }
 });
+
+test('private properties are available internally', t => {
+  t.is(instance.proxyFunction(), 1);
+})
 
 test('instance can be stringified', t => {
   const expected = JSON.stringify({
@@ -131,3 +144,15 @@ test('custom toJSON function', t => {
 
   t.is(JSON.stringify(instance), JSON.stringify({A:1}));
 })
+
+test('nested proxies', t => {
+  const proxiedProxy = new Proxy(instance, {});
+  t.throws(() => proxiedProxy._internalProxyFunction());
+  t.throws(() => proxiedProxy._privateInt);
+  t.throws(() => proxiedProxy._privateString);
+  t.throws(() => proxiedProxy._internalProxyFunction());
+  t.is(proxiedProxy.publicInt, 2);
+  t.is(proxiedProxy.publicString, 'Hello');
+  t.is(proxiedProxy.publicFunction(), 'ABC');
+  t.is(proxiedProxy.proxyFunction(), 1);
+});
